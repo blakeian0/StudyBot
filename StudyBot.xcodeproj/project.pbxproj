@@ -11,7 +11,7 @@
 		25AE473827B5E92C00A9C8E5 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25AE473727B5E92C00A9C8E5 /* ContentView.swift */; };
 		25AE473A27B5E93100A9C8E5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 25AE473927B5E93100A9C8E5 /* Assets.xcassets */; };
 		25AE473D27B5E93100A9C8E5 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 25AE473C27B5E93100A9C8E5 /* Preview Assets.xcassets */; };
-		25AE474627B60A6400A9C8E5 /* TimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25AE474527B60A6400A9C8E5 /* TimerView.swift */; };
+		25AE474827B60CC200A9C8E5 /* StopwatchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25AE474727B60CC200A9C8E5 /* StopwatchView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -20,7 +20,7 @@
 		25AE473727B5E92C00A9C8E5 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		25AE473927B5E93100A9C8E5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		25AE473C27B5E93100A9C8E5 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		25AE474527B60A6400A9C8E5 /* TimerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerView.swift; sourceTree = "<group>"; };
+		25AE474727B60CC200A9C8E5 /* StopwatchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StopwatchView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,7 +57,7 @@
 				25AE473727B5E92C00A9C8E5 /* ContentView.swift */,
 				25AE473927B5E93100A9C8E5 /* Assets.xcassets */,
 				25AE473B27B5E93100A9C8E5 /* Preview Content */,
-				25AE474527B60A6400A9C8E5 /* TimerView.swift */,
+				25AE474727B60CC200A9C8E5 /* StopwatchView.swift */,
 			);
 			path = StudyBot;
 			sourceTree = "<group>";
@@ -140,9 +140,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				25AE474627B60A6400A9C8E5 /* TimerView.swift in Sources */,
 				25AE473827B5E92C00A9C8E5 /* ContentView.swift in Sources */,
 				25AE473627B5E92C00A9C8E5 /* StudyBotApp.swift in Sources */,
+				25AE474827B60CC200A9C8E5 /* StopwatchView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
