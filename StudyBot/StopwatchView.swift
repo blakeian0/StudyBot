@@ -9,31 +9,32 @@ import SwiftUI
 
 struct StopwatchView: View {
     ///Current Progress time expressed in seconds
-    @State private var progressTime = 0
-    
-    ///Computing properties
-    var hours: Int {
-        progressTime / 3600
-    }
-    
-    var minutes: Int {
-      (progressTime % 3600) / 60
-    }
+    @State var countdownTimer = 5
+    @State var timerRunning = false
+    let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
 
-    var seconds: Int {
-      progressTime % 60
-    }
-    
-    /// Increase progressTime each second
-    var timer: Timer {
-        Timer.scheduledTimer(withTimeInterval: 1, repeats: true) {_ in
-            progressTime += 1
-        }
-    }
     
     var body: some View {
-        Text("Stopwatch")
-        Text("\(hours):\(minutes):\(seconds)")
+        VStack {
+            Text("\(countdownTimer)").onReceive(timer) { _ in
+                if countdownTimer > 0 && timerRunning {
+                    countdownTimer -= 1
+                } else {
+                    timerRunning = false
+                }
+            }
+            .font(.system(size: 90))
+            
+            HStack(spacing: 30) {
+                Button("Start") {
+                    timerRunning = true
+                }
+                
+                Button("Reset") {
+                    countdownTimer = 5
+                }
+            }
+        }
     }
 }
 
