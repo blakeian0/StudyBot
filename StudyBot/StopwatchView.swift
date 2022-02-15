@@ -12,10 +12,12 @@ struct StopwatchView: View {
     @State var countdownTimer = 0
     @State var timerRunning = false
     @State var progress: CGFloat = 0
+    @State var mode = "start"
+    @State var buttonText = "Start"
     
     //Configuarable
     @State var startingTime = 25 * 60
-    @State var breakTime = 25 * 60
+    @State var breakTime = 5 * 60
     @State var sessionNum = "3"
     @State var sessionCount = "5"
     @State var timerName = "Focused Study"
@@ -43,12 +45,30 @@ struct StopwatchView: View {
         countdownTimer = startingTime
     }
     
+    /// Dynamic Function Colours
+    func colorAsset(mode: String) -> Color {
+        if (mode == "start") {
+            return Color("StartColor")
+        }
+        else if (mode == "timer") {
+            return Color("TimerColor")
+        }
+        else if (mode == "interrupted") {
+            return Color("InterruptedColor")
+        }
+        else {
+            return Color.black
+        }
+    }
+    
     var body: some View {
-        VStack {
+        VStack(spacing: 20) {
+            /// Session Text
             Text("Session: \(sessionNum)/\(sessionCount)")
                 .font(.system(size: 24, weight: .bold))
                 .padding()
             
+            /// Timer
             ZStack{
                 VStack {
                     Text(timerName)
@@ -76,38 +96,47 @@ struct StopwatchView: View {
                 }
 
                 
-                CircularProgressBar(circleProgress: $progress, widthAndHeight: 300, staticColor: .accentColor, progressColor: .gray, showLabel: false)
+                CircularProgressBar(circleProgress: $progress, widthAndHeight: 300, staticColor: colorAsset(mode: self.mode), progressColor: .gray, showLabel: false)
                     .onAppear(perform: onStart)
             }
 
-            
-            
-            HStack(spacing: 30) {
-                Button("Start") {
+            /// Button
+            Button(action: {
+                if (mode == "start") {
+                    mode = "timer"
                     timerRunning = true
+                    buttonText = "Pause"
+                }
+                else if (mode == "timer") {
+                    mode = "interrupted"
+                    timerRunning = false
+                    buttonText = "Resume"
+                }
+                else if (mode == "interrupted") {
+                    mode = "timer"
+                    timerRunning = true
+                    buttonText = "Pause"
                 }
                 
-                Button("Reset") {
-                    countdownTimer = startingTime
-                    progress = 0
-                }
-            }
-            
-            Text("\(countdownTimer), \(progress)")
-            
-            Button(action: {
-                print("Round Action")
+                
                 }) {
                     ZStack {
                         Circle()
-                            .stroke(Color.accentColor, lineWidth: 3)
+                            .stroke(colorAsset(mode: self.mode), lineWidth: 3)
                             .frame(width: 110, height: 110)
-                        Text("Press")
+                        Text(buttonText)
                             .frame(width: 100, height: 100)
                             .foregroundColor(Color.black)
-                            .background(Color.accentColor)
+                            .background(colorAsset(mode: self.mode))
                             .clipShape(Circle())
                     }
+            }
+            
+            ///Debug Reset
+            Button("Reset") {
+                timerRunning = false
+                countdownTimer = startingTime
+                progress = 0
             }
         }
     }
