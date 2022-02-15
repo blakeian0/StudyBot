@@ -8,11 +8,17 @@
 import SwiftUI
 
 struct StopwatchView: View {
-    ///Current Progress time expressed in seconds
-    @State var startingTime = 5 * 60
-    @State var countdownTimer = 5 * 60
+    ///Non-configuarable
+    @State var countdownTimer = 0
     @State var timerRunning = false
     @State var progress: CGFloat = 0
+    
+    //Configuarable
+    @State var startingTime = 25 * 60
+    @State var breakTime = 25 * 60
+    @State var sessionNum = "3"
+    @State var sessionCount = "5"
+    @State var timerName = "Focused Study"
     
     let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
 
@@ -29,22 +35,49 @@ struct StopwatchView: View {
         }
     }
     
+    var breakMinutes: String {
+        String((breakTime % 3600) / 60)
+    }
+    
+    func onStart() {
+        countdownTimer = startingTime
+    }
+    
     var body: some View {
         VStack {
+            Text("Session: \(sessionNum)/\(sessionCount)")
+                .font(.system(size: 24, weight: .bold))
+                .padding()
+            
             ZStack{
-                Text("\(minutes):\(seconds)").onReceive(timer) { _ in
-                    if countdownTimer > 0 && timerRunning {
-                        countdownTimer -= 1
-                        withAnimation() {
-                            progress = 1 - CGFloat(Float(countdownTimer) / Float(startingTime))
+                VStack {
+                    Text(timerName)
+                        .font(.system(size: 24))
+                    
+                    Text("\(minutes):\(seconds)").onReceive(timer) { _ in
+                        if countdownTimer > 0 && timerRunning {
+                            countdownTimer -= 1
+                            withAnimation() {
+                                progress = 1 - CGFloat(Float(countdownTimer) / Float(startingTime))
+                            }
+                        } else {
+                            timerRunning = false
                         }
-                    } else {
-                        timerRunning = false
                     }
+                    .font(.system(size: 72))
+                    
+                    HStack {
+                        Image(systemName: "clock")
+                            .font(.system(size: 24))
+                        Text("\(breakMinutes):00")
+                            .font(.system(size: 24))
+                    }
+
                 }
-                .font(.system(size: 90))
+
                 
                 CircularProgressBar(circleProgress: $progress, widthAndHeight: 300, staticColor: .accentColor, progressColor: .gray, showLabel: false)
+                    .onAppear(perform: onStart)
             }
 
             
