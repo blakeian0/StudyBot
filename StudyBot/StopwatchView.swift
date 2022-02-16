@@ -20,7 +20,7 @@ struct StopwatchView: View {
     
     
     //Configuarable
-    @State var startingTime = 25 * 60
+    @State var startingTime = 15
     @State var startingBreak = 5 * 60
     @State var sessionNum = "3"
     @State var sessionCount = "5"
@@ -178,12 +178,16 @@ struct StopwatchView: View {
                     timerRunning = false
                     buttonText = "Resume"
                     timerName = "Interruption"
+                    minutes = interruptionMinutes
+                    seconds = interruptionSeconds
                 }
                 else if (mode == "interruption") {
                     mode = "timer"
                     timerRunning = true
                     buttonText = "Pause"
                     timerName = "Focused Study"
+                    minutes = timerMinutes
+                    seconds = timerSeconds
                 }
                 
                 
