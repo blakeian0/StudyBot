@@ -17,11 +17,18 @@ struct StopwatchView: View {
     @State var mode = "start"
     @State var buttonText = "Start"
     
+    @State var buttonOpacity = 0.0
+    @State var startOpacity = 1.0
+    @State var infoOpacity = 0.0
+    
     
     
     //Configuarable
-    @State var startingTime = 15
-    @State var startingBreak = 5 * 60
+    @State var debug = 0.0
+    
+    @State var scene = "start"
+    @State var startingTime = 30
+    @State var startingBreak = 15
     @State var sessionNum = "3"
     @State var sessionCount = "5"
     @State var timerName = "Focused Study"
@@ -67,6 +74,29 @@ struct StopwatchView: View {
         }
     }
     
+    func sceneSwitcher(scene: String) {
+        if (scene == "break") {
+            withAnimation() {
+                buttonOpacity = 0
+                startOpacity = 0
+                infoOpacity = 1
+            }
+
+        } else if (scene == "timer") {
+            withAnimation() {
+                buttonOpacity = 1
+                startOpacity = 0
+                infoOpacity = 1
+            }
+        } else if (scene == "start") {
+            withAnimation() {
+                buttonOpacity = 0
+                startOpacity = 1
+                infoOpacity = 0
+            }
+        }
+    }
+    
     func onStart() {
         countdownTimer = startingTime
         countdownBreak = startingBreak
@@ -99,9 +129,11 @@ struct StopwatchView: View {
             Text("Session: \(sessionNum)/\(sessionCount)")
                 .font(.system(size: 24, weight: .bold))
                 .padding()
+                .opacity(debug)
             
             /// Timer
             ZStack{
+                ///Information
                 VStack {
                     Text(timerName)
                         .font(.system(size: 24))
@@ -115,9 +147,11 @@ struct StopwatchView: View {
                                 }
                             } else {
                                 timerRunning = false
+                                sceneSwitcher(scene: "break")
                                 mode = "break"
                                 progress = 0
                                 timerName = "Break"
+                                countdownTimer = startingTime
                                 minutes = breakMinutes
                                 seconds = breakSeconds
                                 timerRunning = true
@@ -133,7 +167,15 @@ struct StopwatchView: View {
                                 }
                             } else {
                                 timerRunning = false
-                                mode = "break"
+                                mode = "start"
+                                progress = 0
+                                timerName = "Focused Study"
+                                countdownBreak = startingBreak
+                                countdownTimer = startingTime
+                                minutes = timerMinutes
+                                seconds = timerSeconds
+                                sceneSwitcher(scene: "start")
+                                buttonText = "Start"
                             }
                             
                             minutes = breakMinutes
@@ -160,11 +202,34 @@ struct StopwatchView: View {
                     }
 
                 }
+                .opacity(infoOpacity)
+                
+                ///Start Button
+                Button(action: {
+                    mode = "timer"
+                    timerRunning = true
+                    buttonText = "Pause"
+                    sceneSwitcher(scene: "timer")
+                }) {
+                    ZStack {
+                        Circle()
+                            .stroke(colorAsset(mode: self.mode), lineWidth: 3)
+                            .frame(width: 250, height: 250)
+                        Text(buttonText)
+                            .frame(width: 240, height: 240)
+                            .foregroundColor(Color.black)
+                            .background(colorAsset(mode: self.mode))
+                            .clipShape(Circle())
+                            .font(.system(size: 50, weight: .bold))
+                    }
+                }
+                .opacity(startOpacity)
 
                 
                 CircularProgressBar(circleProgress: $progress, widthAndHeight: 300, staticColor: colorAsset(mode: self.mode), progressColor: .gray, showLabel: false)
                     .onAppear(perform: onStart)
             }
+            
 
             /// Button
             Button(action: {
@@ -202,7 +267,8 @@ struct StopwatchView: View {
                             .background(colorAsset(mode: self.mode))
                             .clipShape(Circle())
                     }
-            }
+                }
+                .opacity(buttonOpacity)
             
             ///Debug Reset
             Button("Reset") {
@@ -210,6 +276,7 @@ struct StopwatchView: View {
                 countdownTimer = startingTime
                 progress = 0
             }
+            .opacity(debug)
         }
     }
 }
@@ -217,6 +284,7 @@ struct StopwatchView: View {
 struct StopwatchView_Previews: PreviewProvider {
     static var previews: some View {
         StopwatchView()
+            
             
     }
 }
