@@ -14,29 +14,30 @@ struct StopwatchView: View {
     @State var countdownInterruption = 0
     @State var timerRunning = false
     @State var progress: CGFloat = 0
-    @State var mode = "start"
+    
+    @State var colorMode = "start"
     @State var buttonText = "Start"
+    @State var scene = "start"
+    @State var timerName = "Focused Study"
+    @State var sessionNum = 1
     
     @State var buttonOpacity = 0.0
     @State var startOpacity = 1.0
     @State var infoOpacity = 0.0
     
-    
-    
     //Configuarable
     @State var debug = 0.0
     
-    @State var scene = "start"
-    @State var startingTime = 30
-    @State var startingBreak = 15
-    @State var sessionNum = "3"
-    @State var sessionCount = "5"
-    @State var timerName = "Focused Study"
+    @State var startingTime = 5
+    @State var startingBreak = 6
+    @State var sessionCount = 5
     
     let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
 
     @State var minutes = "0"
     @State var seconds = "00"
+    @State var minutesNext = "0"
+    @State var secondsNext = "00"
     
     var timerMinutes: String {
         String((countdownTimer % 3600) / 60)
@@ -74,26 +75,86 @@ struct StopwatchView: View {
         }
     }
     
-    func sceneSwitcher(scene: String) {
-        if (scene == "break") {
-            withAnimation() {
-                buttonOpacity = 0
-                startOpacity = 0
-                infoOpacity = 1
-            }
-
-        } else if (scene == "timer") {
-            withAnimation() {
-                buttonOpacity = 1
-                startOpacity = 0
-                infoOpacity = 1
-            }
-        } else if (scene == "start") {
+    func sceneSwitcher(to str: String) {
+        if (str == "start") {
+            scene = "start"
+            
+            colorMode = "start"
+            timerName = "Focused Study"
+            buttonText = "Start"
+            
+            progress = 0
+            timerRunning = false
+            countdownBreak = startingBreak
+            countdownTimer = startingTime
+            
             withAnimation() {
                 buttonOpacity = 0
                 startOpacity = 1
                 infoOpacity = 0
             }
+
+        } else if (str == "timer") {
+            scene = "timer"
+            
+            colorMode = "timer"
+            timerName = "Focused Study"
+            buttonText = "Pause"
+            
+            minutes = timerMinutes
+            seconds = timerSeconds
+            minutesNext = breakMinutes
+            secondsNext = breakSeconds
+            
+            timerRunning = true
+            
+            withAnimation() {
+                buttonOpacity = 1
+                startOpacity = 0
+                infoOpacity = 1
+            }
+        } else if (str == "interruption") {
+            scene = "interruption"
+            
+            colorMode = "interruption"
+            timerName = "Interruption"
+            buttonText = "Resume"
+            
+            minutes = interruptionMinutes
+            seconds = interruptionSeconds
+            minutesNext = timerMinutes
+            secondsNext = timerSeconds
+            
+            timerRunning = false
+            
+            withAnimation() {
+                progress = 0
+            }
+            
+        } else if (str == "break") {
+            scene = "break"
+            countdownTimer = startingTime
+            
+            colorMode = "break"
+            timerName = "Break"
+            buttonText = " "
+            
+            minutes = breakMinutes
+            seconds = breakSeconds
+            minutesNext = timerMinutes
+            secondsNext = timerSeconds
+            
+            
+            progress = 0
+            timerRunning = true
+            
+            withAnimation() {
+                buttonOpacity = 0
+                startOpacity = 0
+                infoOpacity = 1
+            }
+        } else {
+            fatalError("Scene (\(scene)) is not defined.")
         }
     }
     
@@ -105,17 +166,17 @@ struct StopwatchView: View {
     }
     
     /// Dynamic Function Colours
-    func colorAsset(mode: String) -> Color {
-        if (mode == "start") {
+    func colorAsset(colorMode: String) -> Color {
+        if (colorMode == "start") {
             return Color("StartColor")
         }
-        else if (mode == "timer") {
+        else if (colorMode == "timer") {
             return Color("TimerColor")
         }
-        else if (mode == "interruption") {
-            return Color("InterruptedColor")
+        else if (colorMode == "interruption") {
+            return Color("InterruptionColor")
         }
-        else if (mode == "break"){
+        else if (colorMode == "break"){
             return Color("BreakColor")
         }
         else {
@@ -139,55 +200,38 @@ struct StopwatchView: View {
                         .font(.system(size: 24))
                     
                     Text("\(minutes):\(seconds)").onReceive(timer) { _ in
-                        if (mode == "timer") {
+                        //Timer Countdown
+                        if (scene == "timer") {
                             if countdownTimer > 0 && timerRunning {
                                 countdownTimer -= 1
                                 withAnimation() {
                                     progress = 1 - CGFloat(Float(countdownTimer) / Float(startingTime))
                                 }
-                            } else {
-                                timerRunning = false
-                                sceneSwitcher(scene: "break")
-                                mode = "break"
-                                progress = 0
-                                timerName = "Break"
-                                countdownTimer = startingTime
-                                minutes = breakMinutes
-                                seconds = breakSeconds
-                                timerRunning = true
-                            }
+                            } else { sceneSwitcher(to: "break") }
                             minutes = timerMinutes
                             seconds = timerSeconds
                             
-                        } else if (mode == "break") {
+                        }
+                        
+                        /// Break Countdown
+                        else if (scene == "break") {
                             if countdownBreak > 0 && timerRunning {
                                 countdownBreak -= 1
                                 withAnimation() {
                                     progress = 1 - CGFloat(Float(countdownBreak) / Float(startingBreak))
                                 }
-                            } else {
-                                timerRunning = false
-                                mode = "start"
-                                progress = 0
-                                timerName = "Focused Study"
-                                countdownBreak = startingBreak
-                                countdownTimer = startingTime
-                                minutes = timerMinutes
-                                seconds = timerSeconds
-                                sceneSwitcher(scene: "start")
-                                buttonText = "Start"
-                            }
-                            
+                            } else { sceneSwitcher(to: "start") }
                             minutes = breakMinutes
                             seconds = breakSeconds
                             
-                        } else if (mode == "interruption") {
+                        }
+                        
+                        /// Interruption Counter
+                        else if (scene == "interruption") {
+                            countdownInterruption += 1
                             minutes = interruptionMinutes
                             seconds = interruptionSeconds
-                            countdownInterruption += 1
-                            withAnimation() {
-                                progress = 0
-                            }
+
                         }
                         
 
@@ -197,7 +241,7 @@ struct StopwatchView: View {
                     HStack {
                         Image(systemName: "clock")
                             .font(.system(size: 24))
-                        Text("\(breakMinutes):\(breakSeconds)")
+                        Text("\(minutesNext):\(secondsNext)")
                             .font(.system(size: 24))
                     }
 
@@ -206,19 +250,16 @@ struct StopwatchView: View {
                 
                 ///Start Button
                 Button(action: {
-                    mode = "timer"
-                    timerRunning = true
-                    buttonText = "Pause"
-                    sceneSwitcher(scene: "timer")
+                    sceneSwitcher(to: "timer")
                 }) {
                     ZStack {
                         Circle()
-                            .stroke(colorAsset(mode: self.mode), lineWidth: 3)
+                            .stroke(colorAsset(colorMode: self.colorMode), lineWidth: 3)
                             .frame(width: 250, height: 250)
                         Text(buttonText)
                             .frame(width: 240, height: 240)
                             .foregroundColor(Color.black)
-                            .background(colorAsset(mode: self.mode))
+                            .background(colorAsset(colorMode: self.colorMode))
                             .clipShape(Circle())
                             .font(.system(size: 50, weight: .bold))
                     }
@@ -226,31 +267,20 @@ struct StopwatchView: View {
                 .opacity(startOpacity)
 
                 
-                CircularProgressBar(circleProgress: $progress, widthAndHeight: 300, staticColor: colorAsset(mode: self.mode), progressColor: .gray, showLabel: false)
+                CircularProgressBar(circleProgress: $progress, widthAndHeight: 300, staticColor: colorAsset(colorMode: self.colorMode), progressColor: .gray, showLabel: false)
                     .onAppear(perform: onStart)
             }
             
 
             /// Button
             Button(action: {
-                if (mode == "start") {
-                    mode = "timer"
-                    timerRunning = true
-                    buttonText = "Pause"
-                }
-                else if (mode == "timer") {
-                    mode = "interruption"
-                    timerRunning = false
-                    buttonText = "Resume"
-                    timerName = "Interruption"
+                if (scene == "timer") {
+                    sceneSwitcher(to: "interruption")
                     minutes = interruptionMinutes
                     seconds = interruptionSeconds
                 }
-                else if (mode == "interruption") {
-                    mode = "timer"
-                    timerRunning = true
-                    buttonText = "Pause"
-                    timerName = "Focused Study"
+                else if (scene == "interruption") {
+                    sceneSwitcher(to: "timer")
                     minutes = timerMinutes
                     seconds = timerSeconds
                 }
@@ -259,24 +289,17 @@ struct StopwatchView: View {
                 }) {
                     ZStack {
                         Circle()
-                            .stroke(colorAsset(mode: self.mode), lineWidth: 3)
+                            .stroke(colorAsset(colorMode: self.colorMode), lineWidth: 3)
                             .frame(width: 110, height: 110)
                         Text(buttonText)
                             .frame(width: 100, height: 100)
                             .foregroundColor(Color.black)
-                            .background(colorAsset(mode: self.mode))
+                            .background(colorAsset(colorMode: self.colorMode))
                             .clipShape(Circle())
                     }
                 }
                 .opacity(buttonOpacity)
             
-            ///Debug Reset
-            Button("Reset") {
-                timerRunning = false
-                countdownTimer = startingTime
-                progress = 0
-            }
-            .opacity(debug)
         }
     }
 }
