@@ -28,8 +28,8 @@ struct StopwatchView: View {
     //Configuarable
     @State var debug = 0.0
     
-    @State var startingTime = 5
-    @State var startingBreak = 6
+    @State var startingTime = 10
+    @State var startingBreak = 5
     @State var sessionCount = 5
     
     let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
