@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		251AF58E27C37A6C004C23D6 /* SubjectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 251AF58D27C37A6C004C23D6 /* SubjectView.swift */; };
 		25AE473627B5E92C00A9C8E5 /* StudyBotApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25AE473527B5E92C00A9C8E5 /* StudyBotApp.swift */; };
 		25AE473827B5E92C00A9C8E5 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25AE473727B5E92C00A9C8E5 /* ContentView.swift */; };
 		25AE473A27B5E93100A9C8E5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 25AE473927B5E93100A9C8E5 /* Assets.xcassets */; };
@@ -16,6 +17,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		251AF58D27C37A6C004C23D6 /* SubjectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubjectView.swift; sourceTree = "<group>"; };
 		25AE473227B5E92C00A9C8E5 /* StudyBot.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = StudyBot.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		25AE473527B5E92C00A9C8E5 /* StudyBotApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyBotApp.swift; sourceTree = "<group>"; };
 		25AE473727B5E92C00A9C8E5 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -61,6 +63,7 @@
 				25AE473B27B5E93100A9C8E5 /* Preview Content */,
 				25AE474727B60CC200A9C8E5 /* StopwatchView.swift */,
 				25AE474927BB2C6600A9C8E5 /* CircularProgressBar.swift */,
+				251AF58D27C37A6C004C23D6 /* SubjectView.swift */,
 			);
 			path = StudyBot;
 			sourceTree = "<group>";
@@ -145,6 +148,7 @@
 			files = (
 				25AE473827B5E92C00A9C8E5 /* ContentView.swift in Sources */,
 				25AE473627B5E92C00A9C8E5 /* StudyBotApp.swift in Sources */,
+				251AF58E27C37A6C004C23D6 /* SubjectView.swift in Sources */,
 				25AE474827B60CC200A9C8E5 /* StopwatchView.swift in Sources */,
 				25AE474A27BB2C6600A9C8E5 /* CircularProgressBar.swift in Sources */,
 			);

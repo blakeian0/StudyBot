@@ -11,7 +11,7 @@ import SwiftUI
 struct StudyBotApp: App {
     var body: some Scene {
         WindowGroup {
-            StopwatchView()
+            ContentView()
         }
     }
 }
