@@ -27,6 +27,9 @@ struct StopwatchView: View {
     
     //Configuarable
     @State var debug = 0.0
+    @State private var showingPopover = false
+    @State private var lengthField: String = "0"
+    @State private var breakField: String = "0"
     
     @State var startingTime = 10
     @State var startingBreak = 5
@@ -186,6 +189,23 @@ struct StopwatchView: View {
     
     var body: some View {
         VStack(spacing: 20) {
+            //Settings
+            Button("Session Settings"){
+                showingPopover = true
+            }
+            .popover(isPresented: $showingPopover) {
+                VStack(spacing:20) {
+                    Button("Close") {
+                        showingPopover = false
+                    }
+                    
+                    Text("Hello")
+                    TextField("Hello", text: $lengthField)
+                }
+                .textFieldStyle(.roundedBorder)
+
+            }
+            
             /// Session Text
             Text("Session: \(sessionNum)/\(sessionCount)")
                 .font(.system(size: 24, weight: .bold))
