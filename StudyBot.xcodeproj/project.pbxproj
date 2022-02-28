@@ -7,7 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		251AF58E27C37A6C004C23D6 /* SubjectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 251AF58D27C37A6C004C23D6 /* SubjectView.swift */; };
+		251AF58E27C37A6C004C23D6 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 251AF58D27C37A6C004C23D6 /* SettingsView.swift */; };
+		253562AE27CC625C00176783 /* SubjectsData.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 253562AC27CC625C00176783 /* SubjectsData.xcdatamodeld */; };
+		253562B227CC8FF600176783 /* DataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 253562B127CC8FF600176783 /* DataController.swift */; };
 		25AE473627B5E92C00A9C8E5 /* StudyBotApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25AE473527B5E92C00A9C8E5 /* StudyBotApp.swift */; };
 		25AE473827B5E92C00A9C8E5 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25AE473727B5E92C00A9C8E5 /* ContentView.swift */; };
 		25AE473A27B5E93100A9C8E5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 25AE473927B5E93100A9C8E5 /* Assets.xcassets */; };
@@ -17,7 +19,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		251AF58D27C37A6C004C23D6 /* SubjectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubjectView.swift; sourceTree = "<group>"; };
+		251AF58D27C37A6C004C23D6 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		253562AD27CC625C00176783 /* Subjects.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Subjects.xcdatamodel; sourceTree = "<group>"; };
+		253562B127CC8FF600176783 /* DataController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataController.swift; sourceTree = "<group>"; };
 		25AE473227B5E92C00A9C8E5 /* StudyBot.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = StudyBot.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		25AE473527B5E92C00A9C8E5 /* StudyBotApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyBotApp.swift; sourceTree = "<group>"; };
 		25AE473727B5E92C00A9C8E5 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -63,7 +67,9 @@
 				25AE473B27B5E93100A9C8E5 /* Preview Content */,
 				25AE474727B60CC200A9C8E5 /* StopwatchView.swift */,
 				25AE474927BB2C6600A9C8E5 /* CircularProgressBar.swift */,
-				251AF58D27C37A6C004C23D6 /* SubjectView.swift */,
+				251AF58D27C37A6C004C23D6 /* SettingsView.swift */,
+				253562AC27CC625C00176783 /* SubjectsData.xcdatamodeld */,
+				253562B127CC8FF600176783 /* DataController.swift */,
 			);
 			path = StudyBot;
 			sourceTree = "<group>";
@@ -146,10 +152,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				253562B227CC8FF600176783 /* DataController.swift in Sources */,
 				25AE473827B5E92C00A9C8E5 /* ContentView.swift in Sources */,
 				25AE473627B5E92C00A9C8E5 /* StudyBotApp.swift in Sources */,
-				251AF58E27C37A6C004C23D6 /* SubjectView.swift in Sources */,
+				251AF58E27C37A6C004C23D6 /* SettingsView.swift in Sources */,
 				25AE474827B60CC200A9C8E5 /* StopwatchView.swift in Sources */,
+				253562AE27CC625C00176783 /* SubjectsData.xcdatamodeld in Sources */,
 				25AE474A27BB2C6600A9C8E5 /* CircularProgressBar.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -355,6 +363,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		253562AC27CC625C00176783 /* SubjectsData.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				253562AD27CC625C00176783 /* Subjects.xcdatamodel */,
+			);
+			currentVersion = 253562AD27CC625C00176783 /* Subjects.xcdatamodel */;
+			path = SubjectsData.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 25AE472A27B5E92C00A9C8E5 /* Project object */;
 }
