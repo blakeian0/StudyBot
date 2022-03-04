@@ -7,8 +7,32 @@
 
 import SwiftUI
 
+
 struct ContentView: View {
+    @FetchRequest(sortDescriptors: []) var subjects: FetchedResults<Subject>
+    @Environment(\.managedObjectContext) var moc
+    
     var body: some View {
+        
+        VStack {
+            Button("Add") {
+                let subjectsRand = ["Maths", "English", "History", "IPT", "SDD"]
+                let subjectRand = subjectsRand.randomElement()!
+                
+                let subject = Subject(context: moc)
+                subject.id = UUID()
+                subject.name = subjectRand
+                
+                try? moc.save()
+            }
+            
+            List(subjects) { subject in
+                Text(subject.name ?? "Unknown")
+            }
+        }
+        
+
+        /*
         TabView {
             StopwatchView()
                 .tabItem {
@@ -26,6 +50,7 @@ struct ContentView: View {
                     Text("Settings")
                 }
         }
+         */
     }
 }
 

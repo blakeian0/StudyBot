@@ -18,4 +18,6 @@ struct StudyBotApp: App {
                 .environment(\.managedObjectContext, dataController.container.viewContext)
         }
     }
+    
+
 }

@@ -9,7 +9,7 @@ import CoreData
 import SwiftUI
 
 class DataController: ObservableObject {
-    let container = NSPersistentContainer(name: "SubjectsData")
+    let container = NSPersistentContainer(name: "SubjectData")
     
     init() {
         container.loadPersistentStores { description, error in
@@ -19,4 +19,3 @@ class DataController: ObservableObject {
         }
     }
 }
-
