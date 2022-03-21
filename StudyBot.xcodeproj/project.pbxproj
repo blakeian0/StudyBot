@@ -11,6 +11,7 @@
 		253562B727CC95D300176783 /* DataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 253562B627CC95D300176783 /* DataController.swift */; };
 		253562B927CCE2D800176783 /* AddSubjectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 253562B827CCE2D700176783 /* AddSubjectView.swift */; };
 		253562BB27CCF06D00176783 /* TargetSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 253562BA27CCF06D00176783 /* TargetSettingsView.swift */; };
+		2599A23427D1BD9B00A28F8E /* SubjectData.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 2599A23227D1BD9B00A28F8E /* SubjectData.xcdatamodeld */; };
 		25AE473627B5E92C00A9C8E5 /* StudyBotApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25AE473527B5E92C00A9C8E5 /* StudyBotApp.swift */; };
 		25AE473827B5E92C00A9C8E5 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25AE473727B5E92C00A9C8E5 /* ContentView.swift */; };
 		25AE473A27B5E93100A9C8E5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 25AE473927B5E93100A9C8E5 /* Assets.xcassets */; };
@@ -25,6 +26,7 @@
 		253562B627CC95D300176783 /* DataController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataController.swift; sourceTree = "<group>"; };
 		253562B827CCE2D700176783 /* AddSubjectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddSubjectView.swift; sourceTree = "<group>"; };
 		253562BA27CCF06D00176783 /* TargetSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TargetSettingsView.swift; sourceTree = "<group>"; };
+		2599A23327D1BD9B00A28F8E /* SubjectData.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = SubjectData.xcdatamodel; sourceTree = "<group>"; };
 		25AE473227B5E92C00A9C8E5 /* StudyBot.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = StudyBot.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		25AE473527B5E92C00A9C8E5 /* StudyBotApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyBotApp.swift; sourceTree = "<group>"; };
 		25AE473727B5E92C00A9C8E5 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -76,6 +78,7 @@
 				253562B627CC95D300176783 /* DataController.swift */,
 				253562B827CCE2D700176783 /* AddSubjectView.swift */,
 				253562BA27CCF06D00176783 /* TargetSettingsView.swift */,
+				2599A23227D1BD9B00A28F8E /* SubjectData.xcdatamodeld */,
 			);
 			path = StudyBot;
 			sourceTree = "<group>";
@@ -158,6 +161,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2599A23427D1BD9B00A28F8E /* SubjectData.xcdatamodeld in Sources */,
 				253562B727CC95D300176783 /* DataController.swift in Sources */,
 				25AE473827B5E92C00A9C8E5 /* ContentView.swift in Sources */,
 				25AE473627B5E92C00A9C8E5 /* StudyBotApp.swift in Sources */,
@@ -371,6 +375,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		2599A23227D1BD9B00A28F8E /* SubjectData.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				2599A23327D1BD9B00A28F8E /* SubjectData.xcdatamodel */,
+			);
+			currentVersion = 2599A23327D1BD9B00A28F8E /* SubjectData.xcdatamodel */;
+			path = SubjectData.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 25AE472A27B5E92C00A9C8E5 /* Project object */;
 }
