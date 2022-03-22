@@ -9,30 +9,11 @@ import SwiftUI
 
 
 struct ContentView: View {
-    @FetchRequest(sortDescriptors: []) var subjects: FetchedResults<Subject>
-    @Environment(\.managedObjectContext) var moc
+    @Binding var subjects: [Subjects]
+    @Environment(\.scenePhase) private var scenePhase
+    let saveAction: ()-> Void
     
     var body: some View {
-        
-        VStack {
-            Button("Add") {
-                let subjectsRand = ["Maths", "English", "History", "IPT", "SDD"]
-                let subjectRand = subjectsRand.randomElement()!
-                
-                let subject = Subject(context: moc)
-                subject.id = UUID()
-                subject.name = subjectRand
-                
-                try? moc.save()
-            }
-            
-            List(subjects) { subject in
-                Text(subject.name ?? "Unknown")
-            }
-        }
-        
-
-        /*
         TabView {
             StopwatchView()
                 .tabItem {
@@ -44,18 +25,20 @@ struct ContentView: View {
                     Image(systemName: "calendar.circle")
                     Text("Calendar")
                 }
-            SettingsView()
+            SettingsView(subjects: $subjects)
                 .tabItem {
                     Image(systemName: "gear")
                     Text("Settings")
                 }
         }
-         */
+        .onChange(of: scenePhase) { phase in
+            if phase == .inactive { saveAction() }
+        }
     }
 }
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView()
+        ContentView(subjects: .constant(Subjects.sampleData), saveAction: {})
     }
 }

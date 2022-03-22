@@ -8,10 +8,14 @@
 
 /* Begin PBXBuildFile section */
 		251AF58E27C37A6C004C23D6 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 251AF58D27C37A6C004C23D6 /* SettingsView.swift */; };
-		253562B727CC95D300176783 /* DataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 253562B627CC95D300176783 /* DataController.swift */; };
-		253562B927CCE2D800176783 /* AddSubjectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 253562B827CCE2D700176783 /* AddSubjectView.swift */; };
-		253562BB27CCF06D00176783 /* TargetSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 253562BA27CCF06D00176783 /* TargetSettingsView.swift */; };
-		2599A23427D1BD9B00A28F8E /* SubjectData.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 2599A23227D1BD9B00A28F8E /* SubjectData.xcdatamodeld */; };
+		254CEAFE27E942F80050FB6D /* Subjects.swift in Sources */ = {isa = PBXBuildFile; fileRef = 254CEAFD27E942F80050FB6D /* Subjects.swift */; };
+		254CEB0027E944770050FB6D /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 254CEAFF27E944770050FB6D /* Theme.swift */; };
+		254CEB0427E945FC0050FB6D /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 254CEB0327E945FC0050FB6D /* CardView.swift */; };
+		254CEB0627E968660050FB6D /* DetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 254CEB0527E968660050FB6D /* DetailView.swift */; };
+		254CEB0827E96DE70050FB6D /* DetailEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 254CEB0727E96DE70050FB6D /* DetailEditView.swift */; };
+		254CEB0A27E9753C0050FB6D /* ThemeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 254CEB0927E9753C0050FB6D /* ThemeView.swift */; };
+		254CEB0C27E975A50050FB6D /* ThemePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 254CEB0B27E975A50050FB6D /* ThemePicker.swift */; };
+		254CEB1027E9AB6D0050FB6D /* SubjectStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 254CEB0F27E9AB6D0050FB6D /* SubjectStore.swift */; };
 		25AE473627B5E92C00A9C8E5 /* StudyBotApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25AE473527B5E92C00A9C8E5 /* StudyBotApp.swift */; };
 		25AE473827B5E92C00A9C8E5 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25AE473727B5E92C00A9C8E5 /* ContentView.swift */; };
 		25AE473A27B5E93100A9C8E5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 25AE473927B5E93100A9C8E5 /* Assets.xcassets */; };
@@ -23,10 +27,14 @@
 
 /* Begin PBXFileReference section */
 		251AF58D27C37A6C004C23D6 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
-		253562B627CC95D300176783 /* DataController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataController.swift; sourceTree = "<group>"; };
-		253562B827CCE2D700176783 /* AddSubjectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddSubjectView.swift; sourceTree = "<group>"; };
-		253562BA27CCF06D00176783 /* TargetSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TargetSettingsView.swift; sourceTree = "<group>"; };
-		2599A23327D1BD9B00A28F8E /* SubjectData.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = SubjectData.xcdatamodel; sourceTree = "<group>"; };
+		254CEAFD27E942F80050FB6D /* Subjects.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Subjects.swift; sourceTree = "<group>"; };
+		254CEAFF27E944770050FB6D /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
+		254CEB0327E945FC0050FB6D /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
+		254CEB0527E968660050FB6D /* DetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailView.swift; sourceTree = "<group>"; };
+		254CEB0727E96DE70050FB6D /* DetailEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailEditView.swift; sourceTree = "<group>"; };
+		254CEB0927E9753C0050FB6D /* ThemeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeView.swift; sourceTree = "<group>"; };
+		254CEB0B27E975A50050FB6D /* ThemePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemePicker.swift; sourceTree = "<group>"; };
+		254CEB0F27E9AB6D0050FB6D /* SubjectStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubjectStore.swift; sourceTree = "<group>"; };
 		25AE473227B5E92C00A9C8E5 /* StudyBot.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = StudyBot.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		25AE473527B5E92C00A9C8E5 /* StudyBotApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyBotApp.swift; sourceTree = "<group>"; };
 		25AE473727B5E92C00A9C8E5 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -48,6 +56,34 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		254CEAFC27E942820050FB6D /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				254CEAFD27E942F80050FB6D /* Subjects.swift */,
+				254CEAFF27E944770050FB6D /* Theme.swift */,
+				254CEB0F27E9AB6D0050FB6D /* SubjectStore.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		254CEB0D27E9A00D0050FB6D /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				25AE473527B5E92C00A9C8E5 /* StudyBotApp.swift */,
+				25AE473727B5E92C00A9C8E5 /* ContentView.swift */,
+				25AE474727B60CC200A9C8E5 /* StopwatchView.swift */,
+				25AE474927BB2C6600A9C8E5 /* CircularProgressBar.swift */,
+				251AF58D27C37A6C004C23D6 /* SettingsView.swift */,
+				25DFB8C827D1B6670064EA1E /* SubjectView.swift */,
+				254CEB0327E945FC0050FB6D /* CardView.swift */,
+				254CEB0527E968660050FB6D /* DetailView.swift */,
+				254CEB0727E96DE70050FB6D /* DetailEditView.swift */,
+				254CEB0927E9753C0050FB6D /* ThemeView.swift */,
+				254CEB0B27E975A50050FB6D /* ThemePicker.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		25AE472927B5E92C00A9C8E5 = {
 			isa = PBXGroup;
 			children = (
@@ -67,18 +103,10 @@
 		25AE473427B5E92C00A9C8E5 /* StudyBot */ = {
 			isa = PBXGroup;
 			children = (
-				25DFB8C827D1B6670064EA1E /* SubjectView.swift */,
-				25AE473527B5E92C00A9C8E5 /* StudyBotApp.swift */,
-				25AE473727B5E92C00A9C8E5 /* ContentView.swift */,
 				25AE473927B5E93100A9C8E5 /* Assets.xcassets */,
+				254CEB0D27E9A00D0050FB6D /* Views */,
+				254CEAFC27E942820050FB6D /* Models */,
 				25AE473B27B5E93100A9C8E5 /* Preview Content */,
-				25AE474727B60CC200A9C8E5 /* StopwatchView.swift */,
-				25AE474927BB2C6600A9C8E5 /* CircularProgressBar.swift */,
-				251AF58D27C37A6C004C23D6 /* SettingsView.swift */,
-				253562B627CC95D300176783 /* DataController.swift */,
-				253562B827CCE2D700176783 /* AddSubjectView.swift */,
-				253562BA27CCF06D00176783 /* TargetSettingsView.swift */,
-				2599A23227D1BD9B00A28F8E /* SubjectData.xcdatamodeld */,
 			);
 			path = StudyBot;
 			sourceTree = "<group>";
@@ -161,15 +189,19 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2599A23427D1BD9B00A28F8E /* SubjectData.xcdatamodeld in Sources */,
-				253562B727CC95D300176783 /* DataController.swift in Sources */,
 				25AE473827B5E92C00A9C8E5 /* ContentView.swift in Sources */,
+				254CEB0627E968660050FB6D /* DetailView.swift in Sources */,
 				25AE473627B5E92C00A9C8E5 /* StudyBotApp.swift in Sources */,
-				253562BB27CCF06D00176783 /* TargetSettingsView.swift in Sources */,
-				253562B927CCE2D800176783 /* AddSubjectView.swift in Sources */,
+				254CEB0C27E975A50050FB6D /* ThemePicker.swift in Sources */,
 				251AF58E27C37A6C004C23D6 /* SettingsView.swift in Sources */,
+				254CEAFE27E942F80050FB6D /* Subjects.swift in Sources */,
+				254CEB0827E96DE70050FB6D /* DetailEditView.swift in Sources */,
+				254CEB0A27E9753C0050FB6D /* ThemeView.swift in Sources */,
+				254CEB1027E9AB6D0050FB6D /* SubjectStore.swift in Sources */,
 				25AE474827B60CC200A9C8E5 /* StopwatchView.swift in Sources */,
+				254CEB0027E944770050FB6D /* Theme.swift in Sources */,
 				25DFB8C927D1B6670064EA1E /* SubjectView.swift in Sources */,
+				254CEB0427E945FC0050FB6D /* CardView.swift in Sources */,
 				25AE474A27BB2C6600A9C8E5 /* CircularProgressBar.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -375,19 +407,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCVersionGroup section */
-		2599A23227D1BD9B00A28F8E /* SubjectData.xcdatamodeld */ = {
-			isa = XCVersionGroup;
-			children = (
-				2599A23327D1BD9B00A28F8E /* SubjectData.xcdatamodel */,
-			);
-			currentVersion = 2599A23327D1BD9B00A28F8E /* SubjectData.xcdatamodel */;
-			path = SubjectData.xcdatamodeld;
-			sourceTree = "<group>";
-			versionGroupType = wrapper.xcdatamodel;
-		};
-/* End XCVersionGroup section */
 	};
 	rootObject = 25AE472A27B5E92C00A9C8E5 /* Project object */;
 }

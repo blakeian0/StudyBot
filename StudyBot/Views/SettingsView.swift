@@ -8,14 +8,13 @@
 import SwiftUI
 
 struct SettingsView: View {
-    @State private var genre = ""
-    let genres = ["maths", "science", "english"]
+    @Binding var subjects: [Subjects]
     
     var body: some View {
         NavigationView {
             Form {
                 Section{
-                    NavigationLink("Subjects", destination: SubjectView())
+                    NavigationLink("Subjects", destination: SubjectView(subjects: $subjects))
                 }
             }
             .navigationTitle("Settings")
@@ -25,6 +24,6 @@ struct SettingsView: View {
 
 struct SettingsView_Previews: PreviewProvider {
     static var previews: some View {
-        SettingsView()
+        SettingsView(subjects: .constant(Subjects.sampleData))
     }
 }
