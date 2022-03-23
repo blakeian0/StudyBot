@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct StopwatchView: View {
+    @Binding var subjects: [Subjects]
+    
     ///Non-configuarable
     @State var countdownTimer = 0
     @State var countdownBreak = 0
@@ -28,6 +30,7 @@ struct StopwatchView: View {
     //Configuarable
     @State var debug = 0.0
     @State private var showingPopover = false
+    @State private var subject = "Subject"
     @State private var lengthField: String = "0"
     @State private var breakField: String = "0"
     
@@ -190,19 +193,35 @@ struct StopwatchView: View {
     var body: some View {
         VStack(spacing: 20) {
             //Settings
-            Button("Session Settings"){
+            Button(subject){
                 showingPopover = true
             }
-            .popover(isPresented: $showingPopover) {
-                VStack(spacing:20) {
-                    Button("Close") {
-                        showingPopover = false
+            .padding(4)
+            .foregroundColor(subjects[subjects.firstIndex(where: {$0.name == subject}) ?? 0].theme.accentColor)
+            .background(subjects[subjects.firstIndex(where: {$0.name == subject}) ?? 0].theme.mainColor)
+            
+        
+
+            .cornerRadius(4)
+            .font(.system(size: 20))
+            .sheet(isPresented: $showingPopover) {
+                NavigationView {
+                    Picker("", selection: $subject) {
+                        ForEach($subjects) { $subject in
+                            Text(subject.name).tag(subject.name)
+                        }
                     }
-                    
-                    Text("Hello")
-                    TextField("Hello", text: $lengthField)
+                    .pickerStyle(.wheel)
+                    .navigationTitle("Select Subject")
+                    .toolbar {
+                        ToolbarItem(placement: .confirmationAction) {
+                            Button("Done") {
+                                showingPopover = false
+                            }
+                        }
+                    }
                 }
-                .textFieldStyle(.roundedBorder)
+
 
             }
             
@@ -321,12 +340,15 @@ struct StopwatchView: View {
                 .opacity(buttonOpacity)
             
         }
+        .onAppear() {
+            subject = subjects[0].name
+        }
     }
 }
 
 struct StopwatchView_Previews: PreviewProvider {
     static var previews: some View {
-        StopwatchView()
+        StopwatchView(subjects: .constant(Subjects.sampleData))
             
             
     }

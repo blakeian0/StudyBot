@@ -9,6 +9,9 @@ import SwiftUI
 
 struct DetailView: View {
     @Binding var subject: Subjects
+    @Binding var subjects: [Subjects]
+    
+    @State private var showAlert = false
     
     @State private var data = Subjects.Data()
     @State private var isPresentingEditView = false
@@ -41,6 +44,23 @@ struct DetailView: View {
                     Spacer()
                     Text("\(String(subject.goal)) hours")
                 }
+            }
+            
+            Section {
+                Button("Delete") {
+                    showAlert = true
+                }
+                .frame(maxWidth: .infinity, alignment: .center)
+                .foregroundColor(Color.red)
+
+            }
+            .alert(isPresented: $showAlert) {
+                Alert(title: Text("Confirm Deletion"),
+                      message: Text("Are you sure you want to delete the subject \(subject.name)?"),
+                    primaryButton: .destructive(Text("Delete")) {
+                    subjects.remove(at: subjects.firstIndex(where: {$0.name == subject.name}) ?? 0)
+                    },
+                    secondaryButton: .cancel())
             }
         }
         .navigationTitle(subject.name)
@@ -75,7 +95,7 @@ struct DetailView: View {
 struct DetailView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
-            DetailView(subject: .constant(Subjects.sampleData[0]))
+            DetailView(subject: .constant(Subjects.sampleData[0]), subjects: .constant(Subjects.sampleData))
         }
     }
 }

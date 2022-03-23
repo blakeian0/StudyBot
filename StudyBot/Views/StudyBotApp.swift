@@ -10,8 +10,7 @@ import SwiftUI
 @main
 struct StudyBotApp: App {
     @StateObject private var store = SubjectStore()
-    
-    
+
     var body: some Scene {
         WindowGroup {
             ContentView(subjects: $store.subjects) {

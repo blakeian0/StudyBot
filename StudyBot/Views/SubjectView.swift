@@ -15,7 +15,7 @@ struct SubjectView: View {
     var body: some View {
         List {
             ForEach($subjects) { $subject in
-                NavigationLink(destination: DetailView(subject: $subject)) {
+                NavigationLink(destination: DetailView(subject: $subject, subjects: $subjects)) {
                     CardView(subject: subject)
                 }
 
@@ -33,6 +33,7 @@ struct SubjectView: View {
         .sheet(isPresented: $isPresentingNewSubjectView) {
             NavigationView {
                 DetailEditView(data: $newSubjectData)
+                    .navigationTitle("New Subject")
                     .toolbar {
                         ToolbarItem(placement: .cancellationAction) {
                             Button("Dismiss") {
@@ -44,6 +45,7 @@ struct SubjectView: View {
                             Button("Add") {
                                 let newSubject = Subjects(name: newSubjectData.name, goal: newSubjectData.goal, theme: newSubjectData.theme, completed: newSubjectData.completed)
                                 subjects.append(newSubject)
+                                newSubjectData = Subjects.Data()
                                 isPresentingNewSubjectView = false
                             }
                         }

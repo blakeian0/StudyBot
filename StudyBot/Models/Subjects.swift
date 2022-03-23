@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Subjects: Identifiable, Codable {
+struct Subjects: Identifiable, Codable, Hashable {
     let id: UUID
     var name: String
     var goal: Float
@@ -47,7 +47,7 @@ extension Subjects {
 extension Subjects {
     static let sampleData: [Subjects] =
     [
-        Subjects(name: "English", goal: 2, theme: .green, completed: 1.2),
+        Subjects(name: "English", goal: 2, theme: .green, completed: 0),
         Subjects(name: "Maths", goal: 4, theme: .red, completed: 0),
         Subjects(name: "Science", goal: 3, theme: .blue, completed: 0)
     ]

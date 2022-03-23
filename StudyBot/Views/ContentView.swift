@@ -14,26 +14,35 @@ struct ContentView: View {
     let saveAction: ()-> Void
     
     var body: some View {
-        TabView {
-            StopwatchView()
-                .tabItem {
-                    Image(systemName: "book.circle")
-                    Text("Study")
-                }
-            Text("Calendar")
-                .tabItem {
-                    Image(systemName: "calendar.circle")
-                    Text("Calendar")
-                }
-            SettingsView(subjects: $subjects)
-                .tabItem {
-                    Image(systemName: "gear")
-                    Text("Settings")
-                }
+        if (subjects.isEmpty) {
+            Button("Start") {
+                subjects = Subjects.sampleData
+            }
+        } else {
+            TabView {
+                StopwatchView(subjects: $subjects)
+                    .tabItem {
+                        Image(systemName: "book.circle")
+                        Text("Study")
+                    }
+                Text("Calendar")
+                    .tabItem {
+                        Image(systemName: "calendar.circle")
+                        Text("Calendar")
+                    }
+                SettingsView(subjects: $subjects)
+                    .tabItem {
+                        Image(systemName: "gear")
+                        Text("Settings")
+                    }
+            }
+
+            .onChange(of: scenePhase) { phase in
+                if phase == .inactive { saveAction() }
+            }
         }
-        .onChange(of: scenePhase) { phase in
-            if phase == .inactive { saveAction() }
-        }
+        
+        
     }
 }
 
