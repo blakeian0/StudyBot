@@ -12,6 +12,7 @@ struct DetailView: View {
     @Binding var subjects: [Subjects]
     
     @State private var showAlert = false
+    @State private var showWarning = false
     
     @State private var data = Subjects.Data()
     @State private var isPresentingEditView = false
@@ -48,7 +49,12 @@ struct DetailView: View {
             
             Section {
                 Button("Delete") {
-                    showAlert = true
+                    if subjects.count == 1 {
+                        showWarning = true
+                    } else {
+                        showAlert = true
+                    }
+                    
                 }
                 .frame(maxWidth: .infinity, alignment: .center)
                 .foregroundColor(Color.red)
@@ -61,6 +67,9 @@ struct DetailView: View {
                     subjects.remove(at: subjects.firstIndex(where: {$0.name == subject.name}) ?? 0)
                     },
                     secondaryButton: .cancel())
+            }
+            .alert("You cannot delete the only subject. There must be a minimum of one.", isPresented: $showWarning) {
+                Button("OK", role: .cancel) {}
             }
         }
         .navigationTitle(subject.name)
