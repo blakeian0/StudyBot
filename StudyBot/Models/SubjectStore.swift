@@ -16,6 +16,7 @@ class SubjectStore: ObservableObject {
             .appendingPathComponent("subjects.data")
     }
     
+    /// Controls saving, and loading of Subjects JSON File
     static func load(completion: @escaping (Result<[Subjects], Error>)->Void) {
         DispatchQueue.global(qos: .background).async {
             do {

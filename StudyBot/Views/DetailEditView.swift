@@ -13,6 +13,7 @@ struct DetailEditView: View {
     let themes = ["red", "orange", "yellow", "green", "mint", "teal", "cyan", "blue", "indigo", "purple", "pink", "brown"]
     
     var body: some View {
+        /// Form to allow submission of data
         Form {
             Section(header: Text("Subject Details")) {
                 TextField("Name", text: $data.name)

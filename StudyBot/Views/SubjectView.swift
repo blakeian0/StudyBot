@@ -14,6 +14,7 @@ struct SubjectView: View {
     
     var body: some View {
         List {
+            /// Lists subjects as a CardView Object
             ForEach($subjects) { $subject in
                 NavigationLink(destination: DetailView(subject: $subject, subjects: $subjects)) {
                     CardView(subject: subject)
@@ -31,6 +32,7 @@ struct SubjectView: View {
             }
         }
         .sheet(isPresented: $isPresentingNewSubjectView) {
+            /// Controld new Subject View
             NavigationView {
                 DetailEditView(data: $newSubjectData)
                     .navigationTitle("New Subject")

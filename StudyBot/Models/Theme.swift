@@ -9,6 +9,7 @@ import SwiftUI
 
 enum Theme: String, CaseIterable, Identifiable, Codable {
     
+    /// Control Theme Structure for the Subjects Structure
     case red
     case orange
     case yellow
