@@ -14,6 +14,7 @@ struct ContentView: View {
     let saveAction: ()-> Void
     
     var body: some View {
+        /// Check to see if subjects is empty and if so, populate with default values
         if (subjects.isEmpty) {
             Button("Start") {
                 subjects = Subjects.sampleData
