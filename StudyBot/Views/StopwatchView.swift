@@ -16,6 +16,7 @@ struct StopwatchView: View {
     @State var countdownInterruption = 0
     @State var timerRunning = false
     @State var progress: CGFloat = 0
+    @State private var dropdownDisabled = false
     
     @State var colorMode = "start"
     @State var buttonText = "Start"
@@ -28,7 +29,7 @@ struct StopwatchView: View {
     @State var infoOpacity = 0.0
     
     //Configuarable
-    @State var debug = 0.0
+    @State var debug = 1.0
     @State private var showingPopover = false
     @State private var subject = "Subject"
     @State private var lengthField: String = "0"
@@ -94,6 +95,8 @@ struct StopwatchView: View {
             countdownBreak = startingBreak
             countdownTimer = startingTime
             
+            dropdownDisabled = false
+            
             withAnimation() {
                 buttonOpacity = 0
                 startOpacity = 1
@@ -111,6 +114,8 @@ struct StopwatchView: View {
             seconds = timerSeconds
             minutesNext = breakMinutes
             secondsNext = breakSeconds
+            
+            dropdownDisabled = true
             
             timerRunning = true
             
@@ -131,6 +136,8 @@ struct StopwatchView: View {
             minutesNext = timerMinutes
             secondsNext = timerSeconds
             
+            dropdownDisabled = true
+            
             timerRunning = false
             
             withAnimation() {
@@ -150,6 +157,7 @@ struct StopwatchView: View {
             minutesNext = timerMinutes
             secondsNext = timerSeconds
             
+            dropdownDisabled = true
             
             progress = 0
             timerRunning = true
@@ -192,6 +200,12 @@ struct StopwatchView: View {
     
     var body: some View {
         VStack(spacing: 20) {
+            /// Session Text
+            Text("Session: \(sessionNum)/\(sessionCount)")
+                .font(.system(size: 24, weight: .bold))
+                .padding()
+                .opacity(debug)
+            
             //Settings
             Button(subject){
                 showingPopover = true
@@ -199,9 +213,7 @@ struct StopwatchView: View {
             .padding(4)
             .foregroundColor(subjects[subjects.firstIndex(where: {$0.name == subject}) ?? 0].theme.accentColor)
             .background(subjects[subjects.firstIndex(where: {$0.name == subject}) ?? 0].theme.mainColor)
-            
-        
-
+            .disabled(dropdownDisabled)
             .cornerRadius(4)
             .font(.system(size: 20))
             .sheet(isPresented: $showingPopover) {
@@ -224,12 +236,6 @@ struct StopwatchView: View {
 
 
             }
-            
-            /// Session Text
-            Text("Session: \(sessionNum)/\(sessionCount)")
-                .font(.system(size: 24, weight: .bold))
-                .padding()
-                .opacity(debug)
             
             /// Timer
             ZStack{
@@ -311,33 +317,44 @@ struct StopwatchView: View {
             }
             
 
-            /// Button
-            Button(action: {
-                if (scene == "timer") {
-                    sceneSwitcher(to: "interruption")
-                    minutes = interruptionMinutes
-                    seconds = interruptionSeconds
-                }
-                else if (scene == "interruption") {
-                    sceneSwitcher(to: "timer")
-                    minutes = timerMinutes
-                    seconds = timerSeconds
-                }
-                
-                
-                }) {
-                    ZStack {
-                        Circle()
-                            .stroke(colorAsset(colorMode: self.colorMode), lineWidth: 3)
-                            .frame(width: 110, height: 110)
-                        Text(buttonText)
-                            .frame(width: 100, height: 100)
-                            .foregroundColor(Color.black)
-                            .background(colorAsset(colorMode: self.colorMode))
-                            .clipShape(Circle())
+            /// MiniSummary adn Button switiching zstack
+            ZStack {
+                /// Button
+                Button(action: {
+                    if (scene == "timer") {
+                        sceneSwitcher(to: "interruption")
+                        minutes = interruptionMinutes
+                        seconds = interruptionSeconds
                     }
-                }
-                .opacity(buttonOpacity)
+                    else if (scene == "interruption") {
+                        sceneSwitcher(to: "timer")
+                        minutes = timerMinutes
+                        seconds = timerSeconds
+                    }
+                    
+                    
+                    }) {
+                        ZStack {
+                            Circle()
+                                .stroke(colorAsset(colorMode: self.colorMode), lineWidth: 3)
+                                .frame(width: 110, height: 110)
+                            Text(buttonText)
+                                .frame(width: 100, height: 100)
+                                .foregroundColor(Color.black)
+                                .background(colorAsset(colorMode: self.colorMode))
+                                .clipShape(Circle())
+                        }
+                    }
+                    .opacity(buttonOpacity)
+                
+                /// Mini Summary
+                MiniSummaryView(subject: subjects[subjects.firstIndex(where: {$0.name == subject}) ?? 0])
+                    .opacity(1.0 - buttonOpacity)
+                    .scaleEffect(0.9)
+                    
+            }
+            
+            
             
         }
         .onAppear() {

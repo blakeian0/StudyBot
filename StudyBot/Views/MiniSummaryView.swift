@@ -9,8 +9,38 @@ import SwiftUI
 
 struct MiniSummaryView: View {
     let subject: Subjects
+    @State private var progress: Float = 1
+    
+    let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        
+        VStack(alignment: .leading) {
+            Text(subject.name)
+            ZStack(alignment: .leading) {
+                ProgressView(value: progress, total: subject.goal)
+                    .scaleEffect(x: 1, y: 8, anchor: .center)
+                    .tint(subject.theme.mainColor)
+                    .onReceive(timer) { _ in
+                        withAnimation(.linear) {
+                            progress = subject.completed
+                        }
+                    }
+                
+                Text("\(String(format: "%.1f", (subject.completed))) hours completed")
+                    .padding(.leading)
+            }
+            
+            HStack {
+                Text("0")
+                Spacer()
+                Text("\(String(format: "%.1f", (subject.goal))) hours")
+            }
+            
+            
+            
+        }
+        .padding()
     }
 }
 
@@ -19,7 +49,6 @@ struct MiniSummaryView_Previews: PreviewProvider {
     
     static var previews: some View {
         MiniSummaryView(subject: subject)
-            .background(subject.theme.mainColor)
-            .previewLayout(.fixed(width: 400, height: 600))
+            .previewLayout(.fixed(width: 400, height: 100))
     }
 }
