@@ -16,6 +16,7 @@
 		254CEB0A27E9753C0050FB6D /* ThemeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 254CEB0927E9753C0050FB6D /* ThemeView.swift */; };
 		254CEB0C27E975A50050FB6D /* ThemePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 254CEB0B27E975A50050FB6D /* ThemePicker.swift */; };
 		254CEB1027E9AB6D0050FB6D /* SubjectStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 254CEB0F27E9AB6D0050FB6D /* SubjectStore.swift */; };
+		25645C35286EA7A800E5E3B7 /* CompletedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25645C34286EA7A800E5E3B7 /* CompletedView.swift */; };
 		25AE473627B5E92C00A9C8E5 /* StudyBotApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25AE473527B5E92C00A9C8E5 /* StudyBotApp.swift */; };
 		25AE473827B5E92C00A9C8E5 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25AE473727B5E92C00A9C8E5 /* ContentView.swift */; };
 		25AE473A27B5E93100A9C8E5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 25AE473927B5E93100A9C8E5 /* Assets.xcassets */; };
@@ -36,6 +37,7 @@
 		254CEB0927E9753C0050FB6D /* ThemeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeView.swift; sourceTree = "<group>"; };
 		254CEB0B27E975A50050FB6D /* ThemePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemePicker.swift; sourceTree = "<group>"; };
 		254CEB0F27E9AB6D0050FB6D /* SubjectStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubjectStore.swift; sourceTree = "<group>"; };
+		25645C34286EA7A800E5E3B7 /* CompletedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompletedView.swift; sourceTree = "<group>"; };
 		25AE473227B5E92C00A9C8E5 /* StudyBot.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = StudyBot.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		25AE473527B5E92C00A9C8E5 /* StudyBotApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyBotApp.swift; sourceTree = "<group>"; };
 		25AE473727B5E92C00A9C8E5 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -83,6 +85,7 @@
 				254CEB0927E9753C0050FB6D /* ThemeView.swift */,
 				254CEB0B27E975A50050FB6D /* ThemePicker.swift */,
 				25E4F87A28691A7000D5BD67 /* MiniSummaryView.swift */,
+				25645C34286EA7A800E5E3B7 /* CompletedView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -198,6 +201,7 @@
 				254CEB0C27E975A50050FB6D /* ThemePicker.swift in Sources */,
 				251AF58E27C37A6C004C23D6 /* SettingsView.swift in Sources */,
 				254CEAFE27E942F80050FB6D /* Subjects.swift in Sources */,
+				25645C35286EA7A800E5E3B7 /* CompletedView.swift in Sources */,
 				25E4F87B28691A7000D5BD67 /* MiniSummaryView.swift in Sources */,
 				254CEB0827E96DE70050FB6D /* DetailEditView.swift in Sources */,
 				254CEB0A27E9753C0050FB6D /* ThemeView.swift in Sources */,

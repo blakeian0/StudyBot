@@ -22,7 +22,6 @@ struct StopwatchView: View {
     @State var buttonText = "Start"
     @State var scene = "start"
     @State var timerName = "Focused Study"
-    @State var sessionNum = 1
     
     @State var buttonOpacity = 0.0
     @State var startOpacity = 1.0
@@ -37,7 +36,6 @@ struct StopwatchView: View {
     
     @State var startingTime = 10
     @State var startingBreak = 5
-    @State var sessionCount = 5
     
     let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
 
@@ -200,12 +198,7 @@ struct StopwatchView: View {
     
     var body: some View {
         VStack(spacing: 20) {
-            /// Session Text
-            Text("Session: \(sessionNum)/\(sessionCount)")
-                .font(.system(size: 24, weight: .bold))
-                .padding()
-                .opacity(debug)
-            
+
             //Settings
             Button(subject){
                 showingPopover = true
@@ -237,8 +230,9 @@ struct StopwatchView: View {
 
             }
             
+            
             /// Timer
-            ZStack{
+            ZStack {
                 ///Information
                 VStack {
                     Text(timerName)
@@ -265,7 +259,10 @@ struct StopwatchView: View {
                                 withAnimation() {
                                     progress = 1 - CGFloat(Float(countdownBreak) / Float(startingBreak))
                                 }
-                            } else { sceneSwitcher(to: "start") }
+                            } else {
+                                sceneSwitcher(to: "start")
+                                NavigationLink(destination: CompletedView(timeToAdd: 60, subject: subject))
+                            }
                             minutes = breakMinutes
                             seconds = breakSeconds
                             
@@ -315,9 +312,10 @@ struct StopwatchView: View {
                 CircularProgressBar(circleProgress: $progress, widthAndHeight: 300, staticColor: colorAsset(colorMode: self.colorMode), progressColor: .gray, showLabel: false)
                     .onAppear(perform: onStart)
             }
+            .padding(.top, 20.0)
             
 
-            /// MiniSummary adn Button switiching zstack
+            /// MiniSummary and Button switiching zstack
             ZStack {
                 /// Button
                 Button(action: {
