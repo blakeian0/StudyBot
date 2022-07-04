@@ -11,6 +11,7 @@ import SwiftUI
 struct ContentView: View {
     @Binding var subjects: [Subjects]
     @Environment(\.scenePhase) private var scenePhase
+    
     let saveAction: ()-> Void
     
     var body: some View {

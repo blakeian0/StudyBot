@@ -212,8 +212,8 @@ struct StopwatchView: View {
             .sheet(isPresented: $showingPopover) {
                 NavigationView {
                     Picker("", selection: $subject) {
-                        ForEach($subjects) { $subject in
-                            Text(subject.name).tag(subject.name)
+                        ForEach($subjects) { $subjecties in
+                            Text(subjecties.name).tag(subjecties.name)
                         }
                     }
                     .pickerStyle(.wheel)
@@ -261,7 +261,7 @@ struct StopwatchView: View {
                                 }
                             } else {
                                 sceneSwitcher(to: "start")
-                                NavigationLink(destination: CompletedView(timeToAdd: 60, subject: subject))
+                                //NavigationLink(destination: CompletedView(timeToAdd: 60, subject: subject))
                             }
                             minutes = breakMinutes
                             seconds = breakSeconds
