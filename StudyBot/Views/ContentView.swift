@@ -22,7 +22,7 @@ struct ContentView: View {
             }
         } else {
             TabView {
-                StopwatchView(subjects: $subjects)
+                StopwatchView(subjects: $subjects, subject: Subjects.sampleData[0])
                     .tabItem {
                         Image(systemName: "book.circle")
                         Text("Study")

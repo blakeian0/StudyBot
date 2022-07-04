@@ -9,6 +9,7 @@ import SwiftUI
 
 struct StopwatchView: View {
     @Binding var subjects: [Subjects]
+    @State var subject: Subjects
     
     ///Non-configuarable
     @State var countdownTimer = 0
@@ -26,16 +27,17 @@ struct StopwatchView: View {
     @State var buttonOpacity = 0.0
     @State var startOpacity = 1.0
     @State var infoOpacity = 0.0
+    @State private var times: [Int] = [0, 0, 0, 0]
     
     //Configuarable
     @State var debug = 1.0
     @State private var showingPopover = false
-    @State private var subject = "Subject"
+    @State private var showingFinished = false
     @State private var lengthField: String = "0"
     @State private var breakField: String = "0"
     
-    @State var startingTime = 10
-    @State var startingBreak = 5
+    @State var startingTime = 2
+    @State var startingBreak = 2
     
     let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
 
@@ -90,6 +92,7 @@ struct StopwatchView: View {
             
             progress = 0
             timerRunning = false
+            countdownInterruption = 0
             countdownBreak = startingBreak
             countdownTimer = startingTime
             
@@ -200,12 +203,12 @@ struct StopwatchView: View {
         VStack(spacing: 20) {
 
             //Settings
-            Button(subject){
+            Button(subject.name){
                 showingPopover = true
             }
             .padding(4)
-            .foregroundColor(subjects[subjects.firstIndex(where: {$0.name == subject}) ?? 0].theme.accentColor)
-            .background(subjects[subjects.firstIndex(where: {$0.name == subject}) ?? 0].theme.mainColor)
+            .foregroundColor(subject.theme.accentColor)
+            .background(subject.theme.mainColor)
             .disabled(dropdownDisabled)
             .cornerRadius(4)
             .font(.system(size: 20))
@@ -213,7 +216,7 @@ struct StopwatchView: View {
                 NavigationView {
                     Picker("", selection: $subject) {
                         ForEach($subjects) { $subjecties in
-                            Text(subjecties.name).tag(subjecties.name)
+                            Text(subjecties.name).tag(subjecties)
                         }
                     }
                     .pickerStyle(.wheel)
@@ -260,8 +263,9 @@ struct StopwatchView: View {
                                     progress = 1 - CGFloat(Float(countdownBreak) / Float(startingBreak))
                                 }
                             } else {
+                                times = [countdownTimer, countdownInterruption, startingTime, startingBreak]
+                                showingFinished = true
                                 sceneSwitcher(to: "start")
-                                //NavigationLink(destination: CompletedView(timeToAdd: 60, subject: subject))
                             }
                             minutes = breakMinutes
                             seconds = breakSeconds
@@ -289,6 +293,9 @@ struct StopwatchView: View {
 
                 }
                 .opacity(infoOpacity)
+                .fullScreenCover(isPresented: $showingFinished) {
+                    CompletedView(times: times, subject: subject)
+                }
                 
                 ///Start Button
                 Button(action: {
@@ -346,7 +353,7 @@ struct StopwatchView: View {
                     .opacity(buttonOpacity)
                 
                 /// Mini Summary
-                MiniSummaryView(subject: subjects[subjects.firstIndex(where: {$0.name == subject}) ?? 0])
+                MiniSummaryView(subject: subject)
                     .opacity(1.0 - buttonOpacity)
                     .scaleEffect(0.9)
                     
@@ -356,14 +363,14 @@ struct StopwatchView: View {
             
         }
         .onAppear() {
-            subject = subjects[0].name
+            subject = subjects[0]
         }
     }
 }
 
 struct StopwatchView_Previews: PreviewProvider {
     static var previews: some View {
-        StopwatchView(subjects: .constant(Subjects.sampleData))
+        StopwatchView(subjects: .constant(Subjects.sampleData), subject: Subjects.sampleData[0])
             
             
     }
