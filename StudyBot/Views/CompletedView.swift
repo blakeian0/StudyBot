@@ -14,11 +14,16 @@ struct CompletedView: View {
     // it contains the time the user made it to, the total interrruptions and the initial time and break lengths
     var times: [Int]
     var subject: Subjects
+    var numbery: Float = 0.2
     
-    func convertToMin(temp: Int) -> String{
-        let tempFloat = String(format: "%.1f", (temp/60))
-        let tempString = String(format: "%g", tempFloat)
-        return String((temp/60))
+    func convertToMin(seconds: Int) -> String{
+        var oneDecimal = String(format: "%.1f", (Float(seconds)/60))
+    
+        if (oneDecimal.suffix(2) == ".0") {
+            oneDecimal.removeLast(2)
+        }
+        
+        return oneDecimal
     }
     
     var body: some View {
@@ -30,11 +35,19 @@ struct CompletedView: View {
                     HStack {
                         ZStack {
                             Circle()
-                                .fill(.green)
+                                .strokeBorder(.black, lineWidth: 5)
+                                .background(Circle().fill(.green))
                                 .frame(width: 75, height: 75)
                                 .padding()
                             
-                            Text(String(Float(92/60)))
+                            VStack {
+                                Text(convertToMin(seconds: times[0]))
+                                    .font(.title)
+                                    .fontWeight(.heavy)
+                                
+                                Text("min")
+                            }
+
                         }
                         
                         
@@ -42,38 +55,65 @@ struct CompletedView: View {
                         Divider().frame(height: 100)
                         
                         VStack {
-                            Text("\(times[0]) / \(times[2])")
-                                .font(.headline)
-                                .frame(maxWidth: .infinity, alignment: .center)
-                            
-                            Text("minutes of study completed.")
+                            Text("Another \(convertToMin(seconds: times[0])) minutes added to your study for \(subject.name). Keep it up!")
+                                
                         
                         }
                         
                     }
                     
                     HStack {
-                        Circle()
-                            .fill(.blue)
-                            .frame(width: 75, height: 75)
-                            .padding()
+                        ZStack {
+                            Circle()
+                                .strokeBorder(.black, lineWidth: 5)
+                                .background(Circle().fill(.blue))
+                                .frame(width: 75, height: 75)
+                                .padding()
+                            
+                            VStack {
+                                Text(convertToMin(seconds: times[3]))
+                                    .font(.title)
+                                    .fontWeight(.heavy)
+                                
+                                Text("min")
+                            }
+
+                        }
                         
                         Divider().frame(height: 100)
                         
-                        Text("Congrats")
-                            .padding()
+                        Text("You had a \(convertToMin(seconds: times[3])) minute break, hope you enjoyed it!")
+                            
                     }
                     
                     HStack {
-                        Circle()
-                            .fill(.red)
-                            .frame(width: 75, height: 75)
-                            .padding()
+                        ZStack {
+                            Circle()
+                                .strokeBorder(.black, lineWidth: 5)
+                                .background(Circle().fill(.red))
+                                .frame(width: 75, height: 75)
+                                .padding()
+                            
+                            VStack {
+                                Text(convertToMin(seconds: times[1]))
+                                    .font(.title)
+                                    .fontWeight(.heavy)
+                                
+                                Text("min")
+                            }
+
+                        }
                         
                         Divider().frame(height: 100)
                         
-                        Text("Congrats")
-                            .padding()
+                        if (convertToMin(seconds: times[1]) == "0") {
+                            Text("You weren't interrupted this study session, nice work!")
+                                
+                        } else {
+                        
+                        Text("You were interrupted for a total of \(convertToMin(seconds: times[1])) minutes. Lets get this number down!")
+                            
+                        }
                     }
                     
                     HStack {
@@ -100,6 +140,6 @@ struct CompletedView: View {
 
 struct CompletedView_Previews: PreviewProvider {
     static var previews: some View {
-        CompletedView(times: [90, 12, 60, 30], subject: Subjects.sampleData[0])
+        CompletedView(times: [(15*60), (2*60), (30*60), (5*60)], subject: Subjects.sampleData[0])
     }
 }

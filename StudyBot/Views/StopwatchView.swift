@@ -36,8 +36,8 @@ struct StopwatchView: View {
     @State private var lengthField: String = "0"
     @State private var breakField: String = "0"
     
-    @State var startingTime = 2
-    @State var startingBreak = 2
+    @State var startingTime = 60
+    @State var startingBreak = 20
     
     let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
 
