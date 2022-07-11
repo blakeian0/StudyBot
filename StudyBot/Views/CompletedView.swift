@@ -12,9 +12,11 @@ struct CompletedView: View {
     
     // time is an array of 4 intergers [countdownTimer, interruptionTimer, startingTime, startingBreak]
     // it contains the time the user made it to, the total interrruptions and the initial time and break lengths
+    @Binding var subjects: [Subjects]
     var times: [Int]
     var subject: Subjects
     var numbery: Float = 0.2
+    @State var data = Subjects.Data()
     
     func convertToMin(seconds: Int) -> String{
         var oneDecimal = String(format: "%.1f", (Float(seconds)/60))
@@ -118,7 +120,15 @@ struct CompletedView: View {
                     
                     HStack {
                         Spacer()
-                        Button(action: {presentationMode.wrappedValue.dismiss()}) {
+                        
+                        Button(action: {
+                            data = subject.data
+                            data.completed = Float(1)
+                            subjects[subjects.firstIndex(where: {$0 == subject}) ?? 0].update(from: data)
+                            print(subjects)
+                            
+                            presentationMode.wrappedValue.dismiss()
+                        }) {
                             Text("Dismiss")
                                 .padding()
                             
@@ -140,6 +150,6 @@ struct CompletedView: View {
 
 struct CompletedView_Previews: PreviewProvider {
     static var previews: some View {
-        CompletedView(times: [(15*60), (2*60), (30*60), (5*60)], subject: Subjects.sampleData[0])
+        CompletedView(subjects: .constant(Subjects.sampleData), times: [(15*60), (2*60), (30*60), (5*60)], subject: Subjects.sampleData[0])
     }
 }

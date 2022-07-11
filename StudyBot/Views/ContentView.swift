@@ -16,8 +16,10 @@ struct ContentView: View {
     
     var body: some View {
         /// Check to see if subjects is empty and if so, populate with default values
-        if (subjects.isEmpty) {
+        if (subjects.isEmpty) || (UserDefaults.standard.integer(forKey: "startingTime") == 0) {
             Button("Start") {
+                UserDefaults.standard.set((30*60), forKey: "startingTime")
+                UserDefaults.standard.set((5*60), forKey: "startingBreak")
                 subjects = Subjects.sampleData
             }
         } else {

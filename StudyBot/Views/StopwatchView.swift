@@ -36,8 +36,8 @@ struct StopwatchView: View {
     @State private var lengthField: String = "0"
     @State private var breakField: String = "0"
     
-    @State var startingTime = 60
-    @State var startingBreak = 20
+    @State private var startingTime = UserDefaults.standard.integer(forKey: "startingTime")
+    @State private var startingBreak = UserDefaults.standard.integer(forKey: "startingBreak")
     
     let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
 
@@ -242,6 +242,8 @@ struct StopwatchView: View {
                         .font(.system(size: 24))
                     
                     Text("\(minutes):\(seconds)").onReceive(timer) { _ in
+                        startingTime = UserDefaults.standard.integer(forKey: "startingTime")
+                        startingBreak = UserDefaults.standard.integer(forKey: "startingBreak")
                         //Timer Countdown
                         if (scene == "timer") {
                             if countdownTimer > 0 && timerRunning {
@@ -294,7 +296,7 @@ struct StopwatchView: View {
                 }
                 .opacity(infoOpacity)
                 .fullScreenCover(isPresented: $showingFinished) {
-                    CompletedView(times: times, subject: subject)
+                    CompletedView(subjects: $subjects, times: times, subject: subject)
                 }
                 
                 ///Start Button
@@ -353,9 +355,10 @@ struct StopwatchView: View {
                     .opacity(buttonOpacity)
                 
                 /// Mini Summary
-                MiniSummaryView(subject: subject)
+                MiniSummaryView(subject: $subject)
                     .opacity(1.0 - buttonOpacity)
                     .scaleEffect(0.9)
+                    
                     
             }
             

@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct MiniSummaryView: View {
-    let subject: Subjects
+    @Binding var subject: Subjects
     @State private var progress: Float = 1
     
     let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
@@ -48,7 +48,7 @@ struct MiniSummaryView_Previews: PreviewProvider {
     static var subject = Subjects.sampleData[0]
     
     static var previews: some View {
-        MiniSummaryView(subject: subject)
+        MiniSummaryView(subject: .constant(subject))
             .previewLayout(.fixed(width: 400, height: 100))
     }
 }
