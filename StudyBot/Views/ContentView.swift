@@ -24,15 +24,15 @@ struct ContentView: View {
             }
         } else {
             TabView {
+                SummaryView(subjects: $subjects)
+                    .tabItem {
+                        Image(systemName: "clock.circle")
+                        Text("Summary")
+                    }
                 StopwatchView(subjects: $subjects, subject: Subjects.sampleData[0])
                     .tabItem {
                         Image(systemName: "book.circle")
                         Text("Study")
-                    }
-                Text("Calendar")
-                    .tabItem {
-                        Image(systemName: "calendar.circle")
-                        Text("Calendar")
                     }
                 SettingsView(subjects: $subjects)
                     .tabItem {
