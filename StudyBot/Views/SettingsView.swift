@@ -20,12 +20,14 @@ struct SettingsView: View {
             Form {
                 Section{
                     NavigationLink("Subjects", destination: SubjectView(subjects: $subjects))
+                    
+                    NavigationLink("Online Help", destination: OnlineHelpView())
                 }
                 
                 Section(header: Text("Timer Lengths")) {
                     HStack {
                         Image(systemName: "clock")
-                        Slider(value: $startingTime, in: 1...30, step: 1)
+                        Slider(value: $startingTime, in: 1...90, step: 1)
                         Spacer()
                         Text("\(Int(startingTime)) minutes")
                     }
