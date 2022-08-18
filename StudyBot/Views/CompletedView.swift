@@ -123,7 +123,7 @@ struct CompletedView: View {
                         
                         Button(action: {
                             data = subject.data
-                            data.completed = Float(1)
+                            data.completed = (Float(convertToMin(seconds: times[0])) ?? 0)/60
                             subjects[subjects.firstIndex(where: {$0 == subject}) ?? 0].update(from: data)
                             print(subjects)
                             

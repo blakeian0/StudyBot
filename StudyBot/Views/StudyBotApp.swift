@@ -21,6 +21,8 @@ struct StudyBotApp: App {
                 }
             }
             .onAppear {
+                print("Application Directory: \(NSHomeDirectory())")
+                
                 SubjectStore.load { result in
                     switch result {
                     case .failure(let error):
