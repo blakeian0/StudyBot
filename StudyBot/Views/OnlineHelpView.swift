@@ -12,7 +12,8 @@ struct OnlineHelpView: View {
         ScrollView {
             VStack(spacing: 20) {
                 
-            
+                //This is the simple online help file which shows the user the basic functions of the program.
+                
                 Text("Starting a Timer")
                     .font(.title)
                     

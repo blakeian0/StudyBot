@@ -35,6 +35,7 @@ struct CompletedView: View {
                 Spacer()
                 List {
                     HStack {
+                        /// The icon on the left, showing minutes studied
                         ZStack {
                             Circle()
                                 .strokeBorder(.black, lineWidth: 5)

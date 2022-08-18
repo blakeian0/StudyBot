@@ -14,7 +14,7 @@ struct SettingsView: View {
     @State private var startingBreak = Float(UserDefaults.standard.integer(forKey: "startingBreak")) / 60
     
     
-    
+    // This forms the structure of the settings page.
     var body: some View {
         NavigationView {
             Form {
@@ -26,6 +26,7 @@ struct SettingsView: View {
                 
                 Section(header: Text("Timer Lengths")) {
                     HStack {
+                        //Shows the slider for the starting time restricted from 1-90
                         Image(systemName: "clock")
                         Slider(value: $startingTime, in: 1...90, step: 1)
                         Spacer()
@@ -33,6 +34,7 @@ struct SettingsView: View {
                     }
                     
                     HStack {
+                        //Shows the slider for the break time restricted from 1-30
                         Image(systemName: "powersleep")
                         Slider(value: $startingBreak, in: 1...30, step: 1)
                         Spacer()
@@ -40,6 +42,7 @@ struct SettingsView: View {
                     }
                     
                     Button(action: {
+                        //The button that resets to default
                         startingTime = 30
                         startingBreak = 5
                         UserDefaults.standard.set((Int(startingTime) * 60), forKey: "startingTime")
@@ -53,6 +56,7 @@ struct SettingsView: View {
                     }
                     
                     Button(action: {
+                        //The action of setting the userdefaults to the starting times and break.
                         UserDefaults.standard.set((Int(startingTime) * 60), forKey: "startingTime")
                         UserDefaults.standard.set((Int(startingBreak) * 60), forKey: "startingBreak")
                     }) {

@@ -15,6 +15,8 @@ struct MiniSummaryView: View {
     
     var body: some View {
         
+        //This script serves as the function for the repeated use of the the MiniSummary view.
+        
         VStack(alignment: .leading) {
             Text(subject.name)
             ZStack(alignment: .leading) {
