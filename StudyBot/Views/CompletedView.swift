@@ -32,6 +32,22 @@ struct CompletedView: View {
         NavigationView {
             
             VStack {
+                Button("Driver (convertToMin)") {
+                    let values = [0, 5, 10, 60, 120]
+                    let results = ["0", "0.1", "0.2", "1", "2"]
+                    var i = 0
+                    
+                    for value in values {
+                        let result = convertToMin(seconds: value)
+                        if (results[i] == result) {
+                            print("test for \(results[i]) - Successful")
+                        } else {
+                            print("test for \(results[i]) - Unsuccessful")
+                        }
+                        i = i + 1
+                    }
+                    
+                }
                 Spacer()
                 List {
                     HStack {
